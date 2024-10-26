@@ -50,7 +50,6 @@ public abstract class Spawner<T> : TungMonoBehaviour where T : PoolObj
         this.inPoolObj.Remove(prefab);
     }
 
-    //fromSai
     public virtual void Despawn(T obj)
     {
         if (obj is MonoBehaviour monoBehaviour)

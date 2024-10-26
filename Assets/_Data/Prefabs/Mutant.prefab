@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 194cb1b23d6f26745abd25f2da410e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCtrl: {fileID: 8079465658866865679}
+  enemyCtrl: {fileID: 0}
   pathMoving: {fileID: 0}
   currentPointIndex: 0
   currentPoint: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7043117889270243040}
   - component: {fileID: 1389620089526796379}
-  - component: {fileID: 8079465658866865679}
+  - component: {fileID: 3684830454299390149}
   m_Layer: 0
   m_Name: Mutant
   m_TagString: Untagged
@@ -182,6 +182,7 @@ Transform:
   - {fileID: 1251522756646746906}
   - {fileID: 4072807419919821199}
   - {fileID: 6667478110264651678}
+  - {fileID: 4343069646087289280}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 4.606, y: 88.144, z: -0.011}
 --- !u!195 &1389620089526796379
@@ -206,7 +207,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &8079465658866865679
+--- !u!114 &3684830454299390149
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -215,11 +216,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1436557994211963089}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56eac0c75ae5c3f4f8522a161e424564, type: 3}
+  m_Script: {fileID: 11500000, guid: c3d1138faeace494b9dcfea00b233c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 1389620089526796379}
-  animator: {fileID: 2723602106360145661}
 --- !u!1 &1751284541884588027
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,6 +930,50 @@ Transform:
   - {fileID: 3638392605485278455}
   m_Father: {fileID: 5286634522340717832}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6248314385327109322
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4343069646087289280}
+  - component: {fileID: 4955602218721148224}
+  m_Layer: 0
+  m_Name: Despawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4343069646087289280
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6248314385327109322}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7043117889270243040}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4955602218721148224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6248314385327109322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 940a7f16b47848946a233db680b61680, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6466781454854426969
 GameObject:
   m_ObjectHideFlags: 0

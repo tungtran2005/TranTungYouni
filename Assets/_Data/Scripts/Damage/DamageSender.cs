@@ -10,14 +10,18 @@ public abstract class DamageSender : TungMonoBehaviour
     [SerializeField] protected Collider _collider;
     protected virtual void OnTriggerEnter(Collider other)
     {
+        this.SenderDamage(other);
+    }
+    protected virtual DamageReceiver SenderDamage(Collider other)
+    {
         DamageReceiver damageReceiver = other.GetComponent<DamageReceiver>();
         if (damageReceiver == null)
         {
-            Debug.Log("ontrigger" + other.name);
-            return;
+            //Debug.Log("ontrigger" + other.name);
+            return null;
         }
         damageReceiver.Deduct(this.damge);
-        //Debug.Log(transform.name + " damage " + other.name);
+        return damageReceiver;
     }
     protected override void LoadComponents()
     {

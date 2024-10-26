@@ -18,8 +18,12 @@ public abstract class Despawn<T> : DespawnBase where T : PoolObj
         base.LoadComponents();
         this.LoadParent();
         this.LoadSpawner();
+        this.LoadValue();
     }
-
+    protected virtual void LoadValue()
+    {
+        //For override
+    }
     protected virtual void LoadParent()
     {
         if (this.parent != null) return;
