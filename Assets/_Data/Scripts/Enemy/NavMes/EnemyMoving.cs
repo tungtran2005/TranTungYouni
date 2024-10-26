@@ -10,7 +10,7 @@ public class EnemyMoving : EnemyAbstract
     [SerializeField] protected int currentPointIndex = 0;
     [SerializeField] protected Point currentPoint;
     [SerializeField] protected float pointDistance = Mathf.Infinity;
-    [SerializeField] protected float pointDistanceLimit = 3f;
+    [SerializeField] protected float pointDistanceLimit = 1f;
     [SerializeField] protected bool isFinish = false;
     [SerializeField] protected bool isMoving = false;
     protected override void LoadComponents()
@@ -44,7 +44,7 @@ public class EnemyMoving : EnemyAbstract
         this.currentPoint = pathMoving.GetPoint(this.currentPointIndex);
         this.pointDistance = Vector3.Distance(this.currentPoint.transform.position, transform.position);
         if (this.pointDistance < pointDistanceLimit) this.currentPointIndex++;
-        if(this.currentPointIndex >= this.pathMoving.Points.Count - 1) this.isFinish = true;
+        if(this.currentPointIndex > this.pathMoving.Points.Count - 1) this.isFinish = true;
     }
     protected virtual void LoadMovingStatus()
     {

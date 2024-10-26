@@ -13,7 +13,7 @@ public abstract class DamageReceiver : EnemyAbstract
         this.cunrrentHP -= damage;
         if (this.IsDaed()) this.OnDead();
     }
-    protected virtual bool IsDaed()
+    public virtual bool IsDaed()
     {
         return this.isDead = this.cunrrentHP <= 0;
     }
