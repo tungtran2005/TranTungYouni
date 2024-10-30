@@ -44,7 +44,7 @@ public class EnemyMoving : EnemyAbstract
         this.currentPoint = pathMoving.GetPoint(this.currentPointIndex);
         this.pointDistance = Vector3.Distance(this.currentPoint.transform.position, transform.position);
         if (this.pointDistance < pointDistanceLimit) this.currentPointIndex++;
-        if(this.currentPointIndex > this.pathMoving.Points.Count - 1) this.isFinish = true;
+        if(this.currentPointIndex >= this.pathMoving.Points.Count - 1) this.isFinish = true;
     }
     protected virtual void LoadMovingStatus()
     {

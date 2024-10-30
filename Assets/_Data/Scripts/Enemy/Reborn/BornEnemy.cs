@@ -27,6 +27,7 @@ public class BornEnemy : TungMonoBehaviour
         if (this.timer < this.delay) return;
         this.timer = 0;
         BornPoint bornPoint = this.GetBornPoint();
+        this.enemy = EnemySpawnerCtrl.Instance.Prefabs.GetRandom();
         EnemyCtrl newEnemy = EnemySpawnerCtrl.Instance.Spawner.Spawn(this.enemy, bornPoint.transform.position);
         newEnemy.gameObject.SetActive(true);
         newEnemy.transform.parent = this.holderPrefab;

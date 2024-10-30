@@ -140,12 +140,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 194cb1b23d6f26745abd25f2da410e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCtrl: {fileID: 0}
+  enemyCtrl: {fileID: 3684830454299390149}
   pathMoving: {fileID: 0}
   currentPointIndex: 0
   currentPoint: {fileID: 0}
   pointDistance: Infinity
-  pointDistanceLimit: 3
+  pointDistanceLimit: 1
   isFinish: 0
   isMoving: 0
 --- !u!1 &1436557994211963089
@@ -219,6 +219,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d1138faeace494b9dcfea00b233c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  despawn: {fileID: 4955602218721148224}
+  agent: {fileID: 1389620089526796379}
+  animator: {fileID: 2723602106360145661}
+  damageReceiver: {fileID: 1769067809295788245}
 --- !u!1 &1751284541884588027
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,9 +582,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1517635eb58dbdb479c4af3ac3df096d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cunrrentHP: 10
-  HPMax: 10
+  enemyCtrl: {fileID: 3684830454299390149}
+  cunrrentHP: 6
+  HPMax: 6
   isDead: 0
+  despawn: {fileID: 4955602218721148224}
 --- !u!1 &4996618989967698110
 GameObject:
   m_ObjectHideFlags: 0
@@ -974,6 +980,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 940a7f16b47848946a233db680b61680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 3684830454299390149}
+  spawner: {fileID: 0}
+  isDespawnByTime: 1
+  timeLife: 60
+  currentTime: 60
 --- !u!1 &6466781454854426969
 GameObject:
   m_ObjectHideFlags: 0

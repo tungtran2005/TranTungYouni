@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class  TowerAbstract : TungMonoBehaviour
 {
+    [Header("ctrl")]
     [SerializeField] protected TowerCtrl ctrl;
     protected override void LoadComponents()
     {

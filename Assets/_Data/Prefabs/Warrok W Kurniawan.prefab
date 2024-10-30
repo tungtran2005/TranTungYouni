@@ -1827,12 +1827,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 194cb1b23d6f26745abd25f2da410e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCtrl: {fileID: 0}
+  enemyCtrl: {fileID: 7042499648299016828}
   pathMoving: {fileID: 0}
   currentPointIndex: 0
   currentPoint: {fileID: 0}
   pointDistance: Infinity
-  pointDistanceLimit: 3
+  pointDistanceLimit: 1
   isFinish: 0
   isMoving: 0
 --- !u!1 &6686119638884249534
@@ -1969,6 +1969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d1138faeace494b9dcfea00b233c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  despawn: {fileID: 0}
   agent: {fileID: 0}
   animator: {fileID: 0}
   damageReceiver: {fileID: 0}

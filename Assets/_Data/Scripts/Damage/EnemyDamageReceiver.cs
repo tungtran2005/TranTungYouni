@@ -30,7 +30,7 @@ public class EnemyDamageReceiver : DamageReceiver
         base.OnDead();
         this.enemyCtrl.Agent.isStopped = true;
         this.LoadDyingStatus();
-        this.StartDelay(2f);
+        this.StartDelay(3f);
        
        
     }
