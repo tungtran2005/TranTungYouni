@@ -10,14 +10,14 @@ public abstract class EnemyCtrl : PoolObj
     public NavMeshAgent Agent => agent;
     [SerializeField] protected Animator animator;
     public Animator Animator => animator;
-    [SerializeField] protected DamageReceiver damageReceiver;
-    public DamageReceiver DamageReceiver => damageReceiver;
+    [SerializeField] protected EnemyDamageReceiver enemyDamageReceiver;
+    public EnemyDamageReceiver EnemyDamageReceiver => enemyDamageReceiver;
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadAgent();
         this.LoadAnimator();
-        this.LoadDamageReceiver();
+        this.LoadEnemyDamageReceiver();
     }
     protected virtual void LoadAgent()
     {
@@ -31,10 +31,10 @@ public abstract class EnemyCtrl : PoolObj
         this.animator = transform.Find("Model").GetComponent<Animator>();
         Debug.Log(transform.name + " : LoadAnimator", gameObject);
     }
-    protected virtual void LoadDamageReceiver()
+    protected virtual void LoadEnemyDamageReceiver()
     {
-        if(this.damageReceiver != null) return;
-        this.damageReceiver = transform.Find("DamageReceiver").GetComponent<DamageReceiver>();
-        Debug.Log(transform.name + " : LoadDamageReceiver", gameObject);
+        if(this.enemyDamageReceiver != null) return;
+        this.enemyDamageReceiver = transform.Find("DamageReceiver").GetComponent<EnemyDamageReceiver>();
+        Debug.Log(transform.name + " : LoadEnemyDamageReceiver", gameObject);
     }
 }

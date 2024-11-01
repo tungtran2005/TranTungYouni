@@ -5,7 +5,25 @@ using UnityEngine;
 public abstract class Spawner<T> : TungMonoBehaviour where T : PoolObj
 {
     [SerializeField] protected int spawnCount = 0;
+    [SerializeField] protected Transform holder;
     [SerializeField] protected List<T> inPoolObj = new();
+
+    protected override void LoadComponents()
+    {
+        base.LoadComponents();
+        this.LoadHolder();
+    }
+    protected virtual void LoadHolder()
+    {
+        if(this.holder != null) return;
+        this.holder = transform.Find("Holder");
+        if(this.holder == null)
+        {
+            this.holder = new GameObject("Holder").transform;
+            this.holder.parent = transform;
+        }
+        Debug.Log(transform.name + " : LoadHolder", gameObject);
+    }
     public virtual T Spawn(T prefab)
     {
         T newObject = this.GetObjInPool(prefab);
@@ -14,6 +32,7 @@ public abstract class Spawner<T> : TungMonoBehaviour where T : PoolObj
             newObject = Instantiate(prefab);
             this.spawnCount++;
             this.UpdateName(prefab.transform, newObject.transform);
+            newObject.transform.parent = this.holder;
         }
         return newObject;
     }

@@ -22,7 +22,7 @@ public abstract class DamageReceiver : EnemyAbstract
         this.cunrrentHP = this.HPMax;
         this.isDead = false;
     }
-    protected virtual void OnDead()
+    public virtual void OnDead()
     {
         if (!this.IsDaed()) return;
         //For override

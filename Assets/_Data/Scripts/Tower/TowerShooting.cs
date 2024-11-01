@@ -7,7 +7,6 @@ public class TowerShooting : TowerAbstract
     [Header("shooting")]
     [SerializeField] protected EnemyCtrl target;
     [SerializeField] protected string effecName = "Bullet";
-    [SerializeField] protected Transform holderPrefab;
     [SerializeField] protected float timer = 0;
     [SerializeField] protected float delay = 1f;
     [SerializeField] protected int pointIndex = 0;
@@ -22,7 +21,6 @@ public class TowerShooting : TowerAbstract
     {
         base.LoadComponents();
         this.LoadFirePoint();
-        this.LoadHolder();
     }
     protected virtual void GetTarget()
     {
@@ -31,7 +29,7 @@ public class TowerShooting : TowerAbstract
     protected virtual void LookAtTarget()
     {
         if(this.target == null) return;
-        this.ctrl.Rotator.LookAt(this.target.transform);
+        this.ctrl.Rotator.LookAt(this.target.EnemyDamageReceiver.transform.position);
     }
     protected virtual void Shooting()
     {
@@ -43,7 +41,6 @@ public class TowerShooting : TowerAbstract
         EffecCtrl prefab = EffectSpawnerCtrl.Instance.Prefabs.GetByName(this.effecName);
         EffecCtrl newEffect = EffectSpawnerCtrl.Instance.Spawner.Spawn(prefab, firePoint.transform.position, firePoint.transform.rotation);
         newEffect.gameObject.SetActive(true);
-        newEffect.transform.parent = this.holderPrefab;
     }
     protected virtual FirePoint GetFirePoint()
     {
@@ -57,11 +54,5 @@ public class TowerShooting : TowerAbstract
         FirePoint[] points = this.ctrl.GetComponentsInChildren<FirePoint>();
         this.firePoints = new List<FirePoint>(points);
         Debug.LogWarning (transform.name + ": LoadFirePoint", gameObject);
-    }
-    protected virtual void LoadHolder()
-    {
-        if (this.holderPrefab != null) return;
-        this.holderPrefab = GameObject.Find("Holder").transform;
-        Debug.Log(transform.name + " : LoadHolder ", gameObject);
     }
 }

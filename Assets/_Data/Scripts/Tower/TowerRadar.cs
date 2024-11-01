@@ -82,7 +82,7 @@ public class TowerRadar : TungMonoBehaviour
     protected virtual void CheckIsDead()
     {
         if(this.nearest == null) return;
-        if (this.nearest.DamageReceiver.IsDaed())
+        if (this.nearest.EnemyDamageReceiver.IsDaed())
         {
             this.RemoveEnemy(this.nearest);
         }

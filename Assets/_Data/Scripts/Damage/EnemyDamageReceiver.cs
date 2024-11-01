@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class EnemyDamageReceiver : DamageReceiver
 {
-    [SerializeField] protected EnemyDespawn despawn;
-    protected override void LoadComponents()
-    {
-        base.LoadComponents();
-        this.LoadDespawn();
-    }
-    protected virtual void LoadDespawn()
-    {
-        if (this.despawn != null) return;
-        this.despawn = transform.parent.GetComponentInChildren<EnemyDespawn>();
-        Debug.Log(transform.name + " : LoadDespawn", gameObject);
-    }
     public override void Deduct(int damage)
     {
         base.Deduct(damage);
@@ -25,7 +13,7 @@ public class EnemyDamageReceiver : DamageReceiver
     {
         this.enemyCtrl.Animator.SetTrigger("Hit");
     }
-    protected override void OnDead()
+    public override void OnDead()
     {
         base.OnDead();
         this.enemyCtrl.Agent.isStopped = true;
@@ -50,7 +38,7 @@ public class EnemyDamageReceiver : DamageReceiver
     {
         Debug.Log("Đã chờ xong, thực hiện hành động tiếp theo");
         // Thực hiện mã tiếp theo tại đây
-        this.despawn.DoDespawn();
+        this.enemyCtrl.Despawn.DoDespawn();
         this.Reborn();
     }
 }
