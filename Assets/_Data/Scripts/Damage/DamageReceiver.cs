@@ -8,6 +8,11 @@ public abstract class DamageReceiver : EnemyAbstract
     [SerializeField] protected int HPMax = 6;
     [SerializeField] protected bool isDead = false;
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        this.Reborn();
+    }
     public virtual void Deduct(int damage)
     {
         this.cunrrentHP -= damage;

@@ -4,6 +4,22 @@ using UnityEngine;
 
 public class EnemyDamageReceiver : DamageReceiver
 {
+    [SerializeField] protected CapsuleCollider capsuleCollider;
+    protected override void LoadComponents()
+    {
+        base.LoadComponents();
+        this.LoadCapsuleCollider();
+    }
+    protected virtual void LoadCapsuleCollider()
+    {
+        if (this.capsuleCollider != null) return;
+        this.capsuleCollider = GetComponent<CapsuleCollider>();
+        this.capsuleCollider.center = new Vector3(0, 1, 0);
+        this.capsuleCollider.radius = 0.4f;
+        this.capsuleCollider.height = 1.7f;
+        //this.capsuleCollider.isTrigger = true;
+        Debug.Log(transform.name + ": LoadCapsuleCollider", gameObject);
+    }
     public override void Deduct(int damage)
     {
         base.Deduct(damage);
@@ -16,29 +32,24 @@ public class EnemyDamageReceiver : DamageReceiver
     public override void OnDead()
     {
         base.OnDead();
+        InventoriesManager.Instance.AddItem(ItemType.Gold, 1);
+        InventoriesManager.Instance.AddItem(ItemType.PlayerExp, 2);
         this.enemyCtrl.Agent.isStopped = true;
         this.LoadDyingStatus();
-        this.StartDelay(3f);
-       
-       
+        this.capsuleCollider.enabled = false;
+        Invoke(nameof(this.DoDespawn), 5f);
     }
-    //fromChatGPT(DelayTime)
+    protected virtual void DoDespawn()
+    {
+        this.enemyCtrl.Despawn.DoDespawn();
+    }
     protected virtual void LoadDyingStatus()
     {
         this.enemyCtrl.Animator.SetBool("isDead", this.isDead);
     }
-
-
-    public void StartDelay(float delayTime)
+    protected override void Reborn()
     {
-        Invoke("DoAction", delayTime);
-    }
-
-    private void DoAction()
-    {
-        Debug.Log("Đã chờ xong, thực hiện hành động tiếp theo");
-        // Thực hiện mã tiếp theo tại đây
-        this.enemyCtrl.Despawn.DoDespawn();
-        this.Reborn();
+        base.Reborn();
+        this.capsuleCollider.enabled = true;
     }
 }

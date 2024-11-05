@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public class BulleMoving : MonoBehaviour
 {
-    [SerializeField] protected float speed = 10f;
+    [SerializeField] protected float speed = 30f;
     private void Update()
     {
         this.Moving();

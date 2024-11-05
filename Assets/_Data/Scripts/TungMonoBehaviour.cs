@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class TungMonoBehaviour : MonoBehaviour
 {
+    protected virtual void OnEnable()
+    {
+        //For override
+    }
     protected virtual void Reset()
     {
         this.LoadComponents();

@@ -29,7 +29,7 @@ public class TowerShooting : TowerAbstract
     protected virtual void LookAtTarget()
     {
         if(this.target == null) return;
-        this.ctrl.Rotator.LookAt(this.target.EnemyDamageReceiver.transform.position);
+        this.ctrl.Rotator.LookAt(this.target.transform.position);
     }
     protected virtual void Shooting()
     {

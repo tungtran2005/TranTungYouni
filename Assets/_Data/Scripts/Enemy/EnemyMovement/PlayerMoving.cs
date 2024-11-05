@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoving : MonoBehaviour
+public class PlayerMoving : TungMonoBehaviour
 {
     [SerializeField] protected Rigidbody rb;
     [SerializeField] protected float speed = 5f;
@@ -12,9 +12,16 @@ public class PlayerMoving : MonoBehaviour
     protected Vector3 W = new Vector3(0, 0, 1);
     protected Vector3 S = new Vector3(0, 0, -1);
     protected Vector3 jumpVector = new Vector3(0, 1, 0);
-    private void Start()
+    protected override void LoadComponents()
     {
-        rb = GetComponent<Rigidbody>();
+        base.LoadComponents();
+        this.LoadRigidbody();
+    }
+    protected virtual void LoadRigidbody()
+    {
+        if(this.rb != null) return;
+        this.rb = transform.parent.GetComponentInChildren<Rigidbody>();
+        Debug.Log(transform.name + " : LoadRigidbody", gameObject);
     }
     private void Update()
     {
