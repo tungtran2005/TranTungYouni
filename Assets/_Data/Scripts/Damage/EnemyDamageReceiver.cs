@@ -34,6 +34,7 @@ public class EnemyDamageReceiver : DamageReceiver
         base.OnDead();
         InventoriesManager.Instance.AddItem(ItemType.Gold, 1);
         InventoriesManager.Instance.AddItem(ItemType.PlayerExp, 2);
+        InventoriesManager.Instance.AddItem(ItemType.Wand, 1);
         this.enemyCtrl.Agent.isStopped = true;
         this.LoadDyingStatus();
         this.capsuleCollider.enabled = false;
