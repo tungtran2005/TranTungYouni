@@ -9,7 +9,7 @@ public abstract class InventoryCtrl : MonoBehaviour
     public abstract InventoryType GetInventoryType();
     public virtual void AddItem(ItemInventory item)
     {
-        ItemInventory itemExist = this.FindItem(item);
+        ItemInventory itemExist = this.FindItem(item.ItemProfile.itemType);
         if (itemExist == null)
         {
             item.SetId(Random.Range(0, 9999999));
@@ -18,30 +18,32 @@ public abstract class InventoryCtrl : MonoBehaviour
         }
         itemExist.itemCount += item.itemCount;
     }
-    protected virtual ItemInventory FindItem(ItemInventory item)
-    {
-        foreach (ItemInventory itemInventory in items)
-        {
-            if (itemInventory.ItemProfile.itemType != item.ItemProfile.itemType) continue;
-            if (itemInventory.CanAdd(item.itemCount)) return itemInventory;
-        }
-        return null;
-    }
     public virtual bool RemoveItem(ItemInventory item)
     {
-        ItemInventory itemExist = this.FindItemNotEmpty(item);
+        ItemInventory itemExist = this.FindItemNotEmpty(item.ItemProfile.itemType);
         if (itemExist == null) return false;
         itemExist.Deduct(item.itemCount);
         if (itemExist.itemCount == 0) this.items.Remove(item);
         return true;
     }
-    protected virtual ItemInventory FindItemNotEmpty(ItemInventory item)
+    public virtual ItemInventory FindItem(ItemType itemCode)
     {
-        foreach (ItemInventory itemInventory in items)
+        foreach (ItemInventory itemInventory in this.items)
         {
-            if (itemInventory.ItemProfile.itemType != item.ItemProfile.itemType) continue;
-            if (itemInventory.CanDeduct(item.itemCount)) return itemInventory;
+            if (itemInventory.ItemProfile.itemType == itemCode) return itemInventory;
         }
+
+        return null;
+    }
+
+    public virtual ItemInventory FindItemNotEmpty(ItemType itemCode)
+    {
+        foreach (ItemInventory itemInventory in this.items)
+        {
+            if (itemInventory.ItemProfile.itemType != itemCode) continue;
+            if (itemInventory.itemCount > 0) return itemInventory;
+        }
+
         return null;
     }
 }
