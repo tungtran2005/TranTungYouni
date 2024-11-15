@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletDamageSender : DamageSender
 {
     [SerializeField] protected SphereCollider sphereCollider;
-    [SerializeField] protected BulletDespawn despawn;
+    [SerializeField] protected EffectDespawn despawn;
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -14,7 +14,7 @@ public class BulletDamageSender : DamageSender
     protected virtual void LoadDespawn()
     {
         if (this.despawn != null) return;
-        this.despawn = transform.parent.GetComponentInChildren<BulletDespawn>();
+        this.despawn = transform.parent.GetComponentInChildren<EffectDespawn>();
         Debug.Log(transform.name + " : LoadDespawn", gameObject);
     }
     protected override void LoadCollider()

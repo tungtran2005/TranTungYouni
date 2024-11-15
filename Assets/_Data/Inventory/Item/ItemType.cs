@@ -1,7 +1,14 @@
-using UnityEngine;
- public enum InventoryType
+public enum ItemType
 {
     NoName = 0,
-    Currency = 1,
-    Item = 2,
+    Gold = 1,
+    PlayerExp = 2,
+    Silver = 3,
+
+    Wand = 100,
+    Crossbow = 101,
+    Pistol = 102,
+    ShortGun = 103,
+
+    PotionMana = 200,
 }

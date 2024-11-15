@@ -32,8 +32,10 @@ public class EnemyDamageReceiver : DamageReceiver
     public override void OnDead()
     {
         base.OnDead();
-        InventoriesManager.Instance.AddItem(ItemType.Gold, 1);
-        InventoriesManager.Instance.AddItem(ItemType.PlayerExp, 2);
+        ItemDropSpawnerCtrl.Instance.DropMany(ItemType.Gold, transform.parent.position, 3);
+        ItemDropSpawnerCtrl.Instance.DropMany(ItemType.Silver, transform.parent.position, 5);
+        ItemDropSpawnerCtrl.Instance.Drop(ItemType.Wand, transform.parent.position, 1);
+        InventoriesManager.Instance.AddItem(ItemType.PlayerExp, 1);
         InventoriesManager.Instance.AddItem(ItemType.Wand, 1);
         this.enemyCtrl.Agent.isStopped = true;
         this.LoadDyingStatus();

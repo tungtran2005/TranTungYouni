@@ -10,7 +10,7 @@ public abstract class InventoryCtrl : MonoBehaviour
     public virtual void AddItem(ItemInventory item)
     {
         ItemInventory itemExist = this.FindItem(item.ItemProfile.itemType);
-        if (itemExist == null)
+        if (!item.ItemProfile.isStackable || itemExist == null)
         {
             item.SetId(Random.Range(0, 9999999));
             this.Items.Add(item);

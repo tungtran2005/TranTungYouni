@@ -1,0 +1,39 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+[RequireComponent(typeof(Rigidbody))]
+public abstract class ItemDropCtrl : PoolObj
+{
+    [SerializeField] protected Rigidbody _rigi;
+    public Rigidbody Rigidbody => _rigi;
+
+    [SerializeField] protected int dropCount = 0;
+    public int DropCount => dropCount;
+
+    public abstract ItemType GetItemCode();
+
+    protected override void LoadComponents()
+    {
+        base.LoadComponents();
+        this.LoadRigibody();
+    }
+
+    protected virtual void LoadRigibody()
+    {
+        if (this._rigi != null) return;
+        this._rigi = GetComponentInChildren<Rigidbody>();
+        Debug.Log(transform.name + ": LoadRigibody", gameObject);
+    }
+
+
+    public override string GetName()
+    {
+        return this.GetItemCode().ToString();
+    }
+
+
+    public virtual void SetDropCount(int dropCount)
+    {
+        this.dropCount = dropCount;
+    }
+}

@@ -28,6 +28,7 @@ public class TowerRadar : TungMonoBehaviour
     private void FixedUpdate()
     {
         this.FindEnemyNearest();
+        this.RemoveDeadEnemy();
     }
     protected override void LoadComponents()
     {
@@ -77,5 +78,17 @@ public class TowerRadar : TungMonoBehaviour
     public virtual EnemyCtrl GetTarget()
     {
         return this.nearest;
+    }
+    protected virtual void RemoveDeadEnemy()
+    {
+        foreach (EnemyCtrl enemyCtrl in this.enemies)
+        {
+            if (enemyCtrl.EnemyDamageReceiver.IsDaed())
+            {
+                if (enemyCtrl == this.nearest) this.nearest = null;
+                this.enemies.Remove(enemyCtrl);
+                return;
+            }
+        }
     }
 }
