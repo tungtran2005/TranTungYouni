@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeavyAttack : TungMonoBehaviour
+public class HeavyAttack : TowerAbstract
 {
     [SerializeField] protected string effecName = "Spear";
     [SerializeField] protected float timer = 0;
@@ -25,6 +25,7 @@ public class HeavyAttack : TungMonoBehaviour
     }
     protected virtual void Attack()
     {
+        if (this.ctrl.TowerShooting.Target == null) return;
         this.timer += Time.fixedDeltaTime;
         if (this.timer < this.delay) return;
         this.timer = 0;

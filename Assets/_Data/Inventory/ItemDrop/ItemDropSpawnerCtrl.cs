@@ -28,7 +28,7 @@ public class ItemDropSpawnerCtrl : TungSingleton<ItemDropSpawnerCtrl>
         this.prefabs = GetComponentInChildren<ItemDropPrefabs>();
         Debug.Log(transform.name + " : LoadItemDropPrefabs", gameObject);
     }
-    public virtual ItemDropCtrl Drop(ItemType itemCode, Vector3 position, int dropCount)
+    public virtual ItemDropCtrl Drop(ItemCode itemCode, Vector3 position, int dropCount)
     {
         ItemDropCtrl prefab = this.Prefabs.GetByName(itemCode.ToString());
         ItemDropCtrl newObject = this.Spawner.Spawn(prefab, position);
@@ -37,7 +37,7 @@ public class ItemDropSpawnerCtrl : TungSingleton<ItemDropSpawnerCtrl>
         return newObject;
     }
 
-    public virtual void DropMany(ItemType itemCode, Vector3 dropPosition, int dropCount)
+    public virtual void DropMany(ItemCode itemCode, Vector3 dropPosition, int dropCount)
     {
         for (int i = 0; i < dropCount; i++)
         {

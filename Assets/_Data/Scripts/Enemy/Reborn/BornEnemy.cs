@@ -21,7 +21,7 @@ public class BornEnemy : TungMonoBehaviour
     {
         foreach(EnemyCtrl enemyCtrl in this.spawnedEnemies)
         {
-            if (enemyCtrl.EnemyDamageReceiver.IsDaed())
+            if (enemyCtrl.EnemyDamageReceiver.IsDead())
             {
                 this.spawnedEnemies.Remove(enemyCtrl);
                 return;

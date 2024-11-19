@@ -10,7 +10,7 @@ public abstract class ItemDropCtrl : PoolObj
     [SerializeField] protected int dropCount = 0;
     public int DropCount => dropCount;
 
-    public abstract ItemType GetItemCode();
+    public abstract ItemCode GetItemCode();
 
     protected override void LoadComponents()
     {

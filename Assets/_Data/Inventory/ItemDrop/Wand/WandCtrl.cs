@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class WandCtrl : ItemDropCtrl
 {
-    public override ItemType GetItemCode()
+    public override ItemCode GetItemCode()
     {
-        return ItemType.Wand;
+        return ItemCode.Wand;
     }
 }

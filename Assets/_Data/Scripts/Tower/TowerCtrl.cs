@@ -9,11 +9,20 @@ public class TowerCtrl : TungMonoBehaviour
 
     [SerializeField] protected Transform rotator;
     public Transform Rotator => rotator;
+
+    [SerializeField] protected TowerShooting towerShooting;
+    public TowerShooting TowerShooting => towerShooting;
+
+    [SerializeField] protected TowerLevel towerLevel;
+    public TowerLevel TowerLevel => towerLevel;
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadRadar();
         this.LoadRotator();
+        this.LoadTowerShooting();
+        this.LoadTowerLevel();
     }
     protected virtual void LoadRadar()
     {
@@ -25,5 +34,18 @@ public class TowerCtrl : TungMonoBehaviour
     {
         if(this.rotator != null) return;
         this.rotator = transform.Find("Model").Find("Rotator");
+        Debug.Log(transform.name + " : LoadRotator", gameObject);
+    }
+    protected virtual void LoadTowerShooting()
+    {
+        if (this.towerShooting != null) return;
+        this.towerShooting = GetComponentInChildren<TowerShooting>();
+        Debug.Log(transform.name + " : LoadTowerShooting ", gameObject);
+    }
+    protected virtual void LoadTowerLevel()
+    {
+        if (this.towerLevel != null) return;
+        this.towerLevel = GetComponentInChildren<TowerLevel>();
+        Debug.Log(transform.name + " : LoadTowerLevel", gameObject);
     }
 }

@@ -8,17 +8,12 @@ public abstract class DamageReceiver : EnemyAbstract
     [SerializeField] protected int HPMax = 6;
     [SerializeField] protected bool isDead = false;
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        this.Reborn();
-    }
     public virtual void Deduct(int damage)
     {
         this.cunrrentHP -= damage;
-        if (this.IsDaed()) this.OnDead();
+        if (this.IsDead()) this.OnDead();
     }
-    public virtual bool IsDaed()
+    public virtual bool IsDead()
     {
         return this.isDead = this.cunrrentHP <= 0;
     }
@@ -29,7 +24,7 @@ public abstract class DamageReceiver : EnemyAbstract
     }
     public virtual void OnDead()
     {
-        if (!this.IsDaed()) return;
+        if (!this.IsDead()) return;
         //For override
     }
 }

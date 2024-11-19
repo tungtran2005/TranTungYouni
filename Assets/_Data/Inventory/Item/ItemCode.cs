@@ -1,4 +1,4 @@
-public enum ItemType
+public enum ItemCode
 {
     NoName = 0,
     Gold = 1,

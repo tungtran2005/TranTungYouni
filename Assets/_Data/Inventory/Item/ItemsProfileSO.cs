@@ -5,7 +5,7 @@ using UnityEngine;
 public class ItemsProfileSO : ScriptableObject
 {
     public InventoryType inventoryType;
-    public ItemType itemType;
+    public ItemCode itemType;
     public string itemName;
     public bool isStackable = false;
     public int maxStack = 99;

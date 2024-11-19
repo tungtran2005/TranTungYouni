@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SilverCtrl : ItemDropCtrl
 {
-    public override ItemType GetItemCode()
+    public override ItemCode GetItemCode()
     {
-        return ItemType.Silver;
+        return ItemCode.Silver;
     }
 }

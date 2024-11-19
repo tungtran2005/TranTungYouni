@@ -48,7 +48,7 @@ public class InventoriesManager : TungSingleton<InventoriesManager>
         }
         return null;
     }
-    protected virtual ItemsProfileSO GetProfileByCode(ItemType type)
+    protected virtual ItemsProfileSO GetProfileByCode(ItemCode type)
     {
         foreach (ItemsProfileSO itemsProfile in this.itemProfiles)
         {
@@ -62,7 +62,7 @@ public class InventoriesManager : TungSingleton<InventoriesManager>
         InventoryCtrl inventory = this.GetByType(inventoryType);
         inventory.AddItem(item);
     }
-    public virtual void AddItem(ItemType itemType, int itemCount)
+    public virtual void AddItem(ItemCode itemType, int itemCount)
     {
         ItemsProfileSO itemsProfile = this.GetProfileByCode(itemType);
         ItemInventory item = new(itemsProfile, itemCount);
@@ -74,7 +74,7 @@ public class InventoriesManager : TungSingleton<InventoriesManager>
         InventoryCtrl inventory = this.GetByType(inventoryType);
         inventory.RemoveItem(item);
     }
-    public virtual void RemoveItem(ItemType itemType, int itemCount)
+    public virtual void RemoveItem(ItemCode itemType, int itemCount)
     {
         ItemsProfileSO itemsProfile = this.GetProfileByCode(itemType);
         ItemInventory item = new(itemsProfile, itemCount);

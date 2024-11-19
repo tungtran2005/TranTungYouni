@@ -6,16 +6,21 @@ public class TowerShooting : TowerAbstract
 {
     [Header("shooting")]
     [SerializeField] protected EnemyCtrl target;
+    public EnemyCtrl Target => target;
     [SerializeField] protected string effecName = "Bullet";
     [SerializeField] protected float timer = 0;
     [SerializeField] protected float delay = 1f;
     [SerializeField] protected int pointIndex = 0;
     [SerializeField] protected List<FirePoint> firePoints = new List<FirePoint>();
-    protected virtual void FixedUpdate()
+    [SerializeField] protected int killCount = 0;
+    public int KillCount => killCount;
+    [SerializeField] protected int totalKill = 0;
+    protected virtual void Update()
     {
         this.GetTarget();
         this.LookAtTarget();
         this.Shooting();
+        this.IsTargetDead();
     }
     protected override void LoadComponents()
     {
@@ -34,7 +39,7 @@ public class TowerShooting : TowerAbstract
     protected virtual void Shooting()
     {
         if(this.target == null) return;
-        this.timer += Time.fixedDeltaTime;
+        this.timer += Time.deltaTime;
         if (this.timer < this.delay) return;
         this.timer = 0;
         FirePoint firePoint = this.GetFirePoint();
@@ -55,4 +60,22 @@ public class TowerShooting : TowerAbstract
         this.firePoints = new List<FirePoint>(points);
         Debug.LogWarning (transform.name + ": LoadFirePoint", gameObject);
     }
-}
+    protected virtual bool IsTargetDead()
+    {
+        if (this.target == null) return true;
+        if (!this.target.EnemyDamageReceiver.IsDead()) return false;
+        if (this.target.EnemyDamageReceiver.IsAlreadyCounted) return false;
+        this.target.EnemyDamageReceiver.IsAlreadyCounted = true;
+        this.killCount++;
+        this.totalKill++;
+        this.target = null;
+        return true;
+    }
+
+    public virtual bool DeductKillCount(int count)
+    {
+        if (this.killCount < count) return false;
+        this.killCount -= count;
+        return true;
+    }
+    }

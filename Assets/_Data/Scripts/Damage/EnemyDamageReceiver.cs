@@ -5,6 +5,12 @@ using UnityEngine;
 public class EnemyDamageReceiver : DamageReceiver
 {
     [SerializeField] protected CapsuleCollider capsuleCollider;
+    public bool IsAlreadyCounted { get; set; } = false;
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        this.Reborn();
+    }
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -32,11 +38,11 @@ public class EnemyDamageReceiver : DamageReceiver
     public override void OnDead()
     {
         base.OnDead();
-        ItemDropSpawnerCtrl.Instance.DropMany(ItemType.Gold, transform.parent.position, 3);
-        ItemDropSpawnerCtrl.Instance.DropMany(ItemType.Silver, transform.parent.position, 5);
-        ItemDropSpawnerCtrl.Instance.Drop(ItemType.Wand, transform.parent.position, 1);
-        InventoriesManager.Instance.AddItem(ItemType.PlayerExp, 1);
-        InventoriesManager.Instance.AddItem(ItemType.Wand, 1);
+        ItemDropSpawnerCtrl.Instance.DropMany(ItemCode.Gold, transform.parent.position, 3);
+        ItemDropSpawnerCtrl.Instance.DropMany(ItemCode.Silver, transform.parent.position, 5);
+        ItemDropSpawnerCtrl.Instance.Drop(ItemCode.Wand, transform.parent.position, 1);
+        InventoriesManager.Instance.AddItem(ItemCode.PlayerExp, 1);
+        InventoriesManager.Instance.AddItem(ItemCode.Wand, 1);
         this.enemyCtrl.Agent.isStopped = true;
         this.LoadDyingStatus();
         this.capsuleCollider.enabled = false;
@@ -53,6 +59,7 @@ public class EnemyDamageReceiver : DamageReceiver
     protected override void Reborn()
     {
         base.Reborn();
+        this.IsAlreadyCounted = false;
         this.capsuleCollider.enabled = true;
     }
 }

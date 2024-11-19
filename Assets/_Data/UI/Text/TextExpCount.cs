@@ -10,7 +10,7 @@ public class TextExpCount : TextAbstract
     }
     protected virtual void LoadExpCount()
     {
-        ItemInventory item = InventoriesManager.Instance.Currency().FindItem(ItemType.PlayerExp);
+        ItemInventory item = InventoriesManager.Instance.Currency().FindItem(ItemCode.PlayerExp);
         string itemCount;
         if (item == null) itemCount = "0";
         else itemCount = item.itemCount.ToString();

@@ -26,7 +26,7 @@ public abstract class InventoryCtrl : MonoBehaviour
         if (itemExist.itemCount == 0) this.items.Remove(item);
         return true;
     }
-    public virtual ItemInventory FindItem(ItemType itemCode)
+    public virtual ItemInventory FindItem(ItemCode itemCode)
     {
         foreach (ItemInventory itemInventory in this.items)
         {
@@ -36,7 +36,7 @@ public abstract class InventoryCtrl : MonoBehaviour
         return null;
     }
 
-    public virtual ItemInventory FindItemNotEmpty(ItemType itemCode)
+    public virtual ItemInventory FindItemNotEmpty(ItemCode itemCode)
     {
         foreach (ItemInventory itemInventory in this.items)
         {

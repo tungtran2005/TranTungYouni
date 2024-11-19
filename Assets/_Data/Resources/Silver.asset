@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryType: 1
   itemType: 3
-  itemName: 
+  itemName: Silver
   isStackable: 1
   maxStack: 99
