@@ -3,49 +3,97 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class UIInventory : TungMonoBehaviour
+public class UIInventory : TungSingleton<UIInventory>
 {
-    [SerializeField] protected Transform content;
-    [SerializeField] protected InventoryCtrl inventoryCtrl;
-    [SerializeField] protected UIItem UIItemPrefab;
+    [SerializeField] protected bool isShow = true;
+    public bool IsShow => isShow;
 
+    [SerializeField] protected Transform showHide;
+    [SerializeField] protected BtnItemInventory defaultItemInventoryUI;
+    [SerializeField] protected List<BtnItemInventory> btnItems;
+
+    private void FixedUpdate()
+    {
+        this.ItemsUpdating();
+    }
+    private void LateUpdate()
+    {
+        this.HotKeyToggle();
+    }
+    protected override void Start()
+    {
+        base.Start();
+        this.HideDefaultItemInventory();
+        this.Hide();
+    }
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.LoadContent();
+        this.LoadShowDide();
+        this.LoadBtnItemInventory();
     }
-    protected override void OnEnable()
+    protected virtual void LoadShowDide()
     {
-        base.OnEnable();
-        this.ShowItem();
+        if (this.showHide != null) return;
+        this.showHide = transform.Find("ShowHide");
+        Debug.Log(transform.gameObject + " : LoadShowDide", gameObject);
     }
-    protected virtual void ShowItem()
+    protected virtual void LoadBtnItemInventory()
     {
-        this.ClearItem();
-        UIItem uIItem;
-        foreach (ItemInventory item in this.inventoryCtrl.Items)
+        if (this.defaultItemInventoryUI != null) return;
+        this.defaultItemInventoryUI = GetComponentInChildren<BtnItemInventory>();
+        Debug.Log(transform.name + " : LoadBtnItemInventory", gameObject);
+    }
+    public virtual void Show()
+    {
+        this.showHide.gameObject.SetActive(true);
+        this.isShow = true;
+    }
+    public virtual void Hide()
+    {
+        this.showHide.gameObject.SetActive(false);
+        this.isShow = false;
+    }
+    public virtual void Toggle()
+    {
+        if (this.isShow) this.Hide();
+        else this.Show();
+    }
+    protected virtual void HideDefaultItemInventory()
+    {
+        this.defaultItemInventoryUI.gameObject.SetActive(false);
+    }
+    protected virtual void ItemsUpdating()
+    {
+        if (!this.isShow) return;
+        InventoryCtrl itemInvCtrl = InventoriesManager.Instance.Item();
+
+        BtnItemInventory newBtnItem;
+        foreach (ItemInventory itemInventory in itemInvCtrl.Items)
         {
-            uIItem = this.CreateItem(item);
-            uIItem.transform.SetParent(this.content);
+            newBtnItem = this.GetExistItem(itemInventory);
+            if (newBtnItem == null)
+            {
+                newBtnItem = Instantiate(this.defaultItemInventoryUI);
+                newBtnItem.transform.SetParent(this.defaultItemInventoryUI.transform.parent);
+                newBtnItem.SetItem(itemInventory);
+                newBtnItem.transform.localScale = new Vector3(1, 1, 1);
+                newBtnItem.gameObject.SetActive(true);
+                newBtnItem.name = itemInventory.GetName() + "-" + itemInventory.ItemID;
+                this.btnItems.Add(newBtnItem);
+            }
         }
     }
-    protected virtual void ClearItem()
+    protected virtual BtnItemInventory GetExistItem(ItemInventory itemInventory)
     {
-        foreach (Transform child in this.content)
+        foreach (BtnItemInventory btnItem in this.btnItems)
         {
-            Destroy(child.gameObject);
+            if (btnItem.ItemInventory.ItemID == itemInventory.ItemID) return btnItem;
         }
+        return null;
     }
-    protected virtual UIItem CreateItem(ItemInventory item)
+    protected virtual void HotKeyToggle()
     {
-        UIItem uIItem = Instantiate(this.UIItemPrefab);
-        uIItem.SetUIItem(item);
-        return uIItem;
-    }
-    protected virtual void LoadContent()
-    {
-        if (this.content != null) return;
-        this.content = transform.Find("Viewport").Find("Content");
-        Debug.Log(transform.name + " : LoadContent", gameObject);
+        if(Input.GetKeyUp(KeyCode.I)) this.Toggle();
     }
 }

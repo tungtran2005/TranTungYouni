@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemsProfileSO : ScriptableObject
 {
     public InventoryType inventoryType;
+    public Sprite sprite;
     public ItemCode itemType;
     public string itemName;
     public bool isStackable = false;
