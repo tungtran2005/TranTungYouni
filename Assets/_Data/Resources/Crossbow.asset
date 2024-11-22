@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Crossbow
   m_EditorClassIdentifier: 
   inventoryType: 2
+  sprite: {fileID: 21300000, guid: fb2acd264db5e24428dbf84cf8f0f467, type: 3}
   itemType: 101
   itemName: Crossbow
   isStackable: 0
