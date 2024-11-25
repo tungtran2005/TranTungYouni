@@ -48,7 +48,7 @@ public class InventoriesManager : TungSingleton<InventoriesManager>
         }
         return null;
     }
-    protected virtual ItemsProfileSO GetProfileByCode(ItemCode type)
+    public virtual ItemsProfileSO GetProfileByCode(ItemCode type)
     {
         foreach (ItemsProfileSO itemsProfile in this.itemProfiles)
         {

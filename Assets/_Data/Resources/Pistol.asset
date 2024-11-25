@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   inventoryType: 2
+  sprite: {fileID: 21300000, guid: a6a800c200b0b6a4ab0c4369f13bd6dc, type: 3}
   itemType: 102
   itemName: Pistol
+  price: 0
   isStackable: 0
   maxStack: 99

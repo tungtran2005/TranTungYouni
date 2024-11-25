@@ -38,11 +38,13 @@ public class EnemyDamageReceiver : DamageReceiver
     public override void OnDead()
     {
         base.OnDead();
-        ItemDropSpawnerCtrl.Instance.DropMany(ItemCode.Gold, transform.parent.position, 3);
-        ItemDropSpawnerCtrl.Instance.DropMany(ItemCode.Silver, transform.parent.position, 5);
+        ItemDropSpawnerCtrl.Instance.DropMany(ItemCode.Gold, transform.parent.position, 10);
+        ItemDropSpawnerCtrl.Instance.DropMany(ItemCode.Silver, transform.parent.position, 2);
         ItemDropSpawnerCtrl.Instance.Drop(ItemCode.Wand, transform.parent.position, 1);
+        ItemDropSpawnerCtrl.Instance.Drop(ItemCode.ShortGun, transform.parent.position, 1);
+        ItemDropSpawnerCtrl.Instance.Drop(ItemCode.Pistol, transform.parent.position, 1);
+        ItemDropSpawnerCtrl.Instance.Drop(ItemCode.Crossbow, transform.parent.position, 1);
         InventoriesManager.Instance.AddItem(ItemCode.PlayerExp, 1);
-        InventoriesManager.Instance.AddItem(ItemCode.Wand, 1);
         this.enemyCtrl.Agent.isStopped = true;
         this.LoadDyingStatus();
         this.capsuleCollider.enabled = false;

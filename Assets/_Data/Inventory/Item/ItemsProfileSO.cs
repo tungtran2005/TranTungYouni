@@ -8,6 +8,7 @@ public class ItemsProfileSO : ScriptableObject
     public Sprite sprite;
     public ItemCode itemType;
     public string itemName;
+    public int price;
     public bool isStackable = false;
     public int maxStack = 99;
 }
